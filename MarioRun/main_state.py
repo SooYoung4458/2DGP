@@ -54,6 +54,7 @@ class Tile:
 class Mario:
     def __init__(self):
         self.x, self.y = 100, 90
+        self.high
         self.frame = 0
         self.sign = 15
         self.state = 'RUN'
@@ -62,11 +63,20 @@ class Mario:
         self.jump_image = load_image('Jump.png')
 
     image = None
-    RUN, JUMP, SLIDE = 0, 1, 2
+    RUN, JUMP, SLIDE, JUMP2 = 0, 1, 2
 
     def handle_jump(self):
         self.y += self.sign
         if self.y > 190:
+            self.sign *= -1
+            self.high = self.y
+        if self.y == 90 :
+            self.state = 'RUN'
+            self.sign *= -1
+
+    def handle_jump2(self):
+        self.y += self.sign
+        if self.y > self.high + 100:
             self.sign *= -1
         if self.y == 90 :
             self.state = 'RUN'
@@ -83,14 +93,19 @@ class Mario:
             self.handle_jump()
         elif self.state == 'SLIDE' :
             self.frame = (self.frame + 1) % 1
+        elif self.state == 'JUMP2' :
+            self.frame = (self.frame + 1) % 1
+            self.handle_jump2()
 
     def draw(self):
         if self.state == 'RUN' :
             self.run_image.clip_draw(self.frame * 100, 0, 100, 100, self.x, self.y)
-        if self.state == 'JUMP' :
+        elif self.state == 'JUMP' :
             self.jump_image.clip_draw(self.frame * 110, 0, 100, 100, self.x, self.y)
         elif self.state == 'SLIDE' :
            self.slide_image.clip_draw(self.frame * 100, 0, 100, 100, self.x, self.y)
+        elif self.state == 'JUMP2' :
+            self.jump_image.clip_draw(self.frame * 110, 0, 100, 100, self.x, self.y)
 
 class DownObstacle:
     image = None ;
@@ -170,15 +185,18 @@ def handle_events():
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             game_framework.change_state(title_state)
+
         elif event.type == SDL_KEYDOWN:
             if event.key == SDLK_UP :
                 mario.state = 'JUMP'
             elif event.key == SDLK_DOWN:
-                mario.state = 'SLIDE'
+                if mario.state == 'RUN' :
+                    mario.state = 'SLIDE'
 
         elif event.type == SDL_KEYUP:
             if event.key == SDLK_DOWN:
-                mario.state = 'RUN'
+                if mario.state == 'SLIDE' :
+                    mario.state = 'RUN'
 
 def update():
     global mario, tile, back, dobstacle, uobstacle, gold
