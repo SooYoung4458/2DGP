@@ -1,15 +1,16 @@
-import random
-import json
-import os
-
-
 from pico2d import *
 
 import game_framework
 import title_state
 
+from Mario import Mario
+from BackGround import BackGround
+from Tile import Tile
+from Gold import Gold
+from UpObstacle import UpObstacle
+from DownObstacle import DownObstacle
 
-name = "MainState"
+name = "collision"
 
 mario = None
 grass = None
@@ -18,138 +19,7 @@ dobstacle = None
 uobstacle = None
 gold = None
 
-class BackGround:
-    image = None ;
-    def __init__(self):
-        self.BackScroll = 0
-        self.x = 0
-        if self.image == None:
-            self.image = load_image('Map_background.png')
-    def draw(self):
-        self.image.draw(400 - self.BackScroll,300)
-        self.image.draw(1200 - self.BackScroll,300)
-        if self.BackScroll == 800 :
-            self.BackScroll = 0
-    def update(self):
-        self.BackScroll+=10
-        self.BackScroll%=800
-
-class Tile:
-    image = None ;
-    def __init__(self):
-        if self.image == None:
-            self.image = load_image('tile.png')
-        self.TileScroll = 0
-    def draw(self):
-        self.image.draw(400-self.TileScroll,30)
-        self.image.draw(1200-self.TileScroll,30)
-        if self.TileScroll == 390 :
-            self.TileScroll = 0
-
-    def update(self):
-        self.TileScroll += 15
-        self.TileScroll%=1000
-
-class Mario:
-    def __init__(self):
-        self.x, self.y = 100, 90
-        self.high
-        self.frame = 0
-        self.sign = 15
-        self.state = 'RUN'
-        self.run_image = load_image('mario_animation.png')
-        self.slide_image = load_image('Slide.png')
-        self.jump_image = load_image('Jump.png')
-
-    image = None
-    RUN, JUMP, SLIDE, JUMP2 = 0, 1, 2, 3
-
-    def handle_jump(self):
-        self.y += self.sign
-        if self.y > 190:
-            self.sign *= -1
-            self.high = self.y
-        if self.y == 90 :
-            self.state = 'RUN'
-            self.sign *= -1
-
-    def handle_jump2(self):
-        self.y += self.sign
-        if self.y > self.high + 100:
-            self.sign *= -1
-        if self.y == 90 :
-            self.state = 'RUN'
-            self.sign *= -1
-
-    def handle_slide(self):
-        self.x += 0
-
-    def update(self):
-        if self.state == 'RUN' :
-            self.frame = (self.frame + 1) % 5
-        elif self.state == 'JUMP' :
-            self.frame = (self.frame + 1) % 1
-            self.handle_jump()
-        elif self.state == 'SLIDE' :
-            self.frame = (self.frame + 1) % 1
-        elif self.state == 'JUMP2' :
-            self.frame = (self.frame + 1) % 1
-            self.handle_jump2()
-
-    def draw(self):
-        if self.state == 'RUN' :
-            self.run_image.clip_draw(self.frame * 100, 0, 100, 100, self.x, self.y)
-        elif self.state == 'JUMP' :
-            self.jump_image.clip_draw(self.frame * 110, 0, 100, 100, self.x, self.y)
-        elif self.state == 'SLIDE' :
-           self.slide_image.clip_draw(self.frame * 100, 0, 100, 100, self.x, self.y)
-        elif self.state == 'JUMP2' :
-            self.jump_image.clip_draw(self.frame * 110, 0, 100, 100, self.x, self.y)
-
-class DownObstacle:
-    image = None ;
-    def __init__(self):
-        if self.image == None:
-            self.image = load_image('DownObstacle.png')
-        self.ObstacleScroll = 0
-    def draw(self):
-        self.image.draw(1000-self.ObstacleScroll,90)
-
-    def update(self):
-        self.ObstacleScroll += 15
-        self.ObstacleScroll%= 1200
-
-class UpObstacle:
-    image = None ;
-    def __init__(self):
-        if self.image == None:
-            self.image = load_image('UpObstacle.png')
-        self.ObstacleScroll = 0
-    def draw(self):
-        self.image.draw(1200-self.ObstacleScroll,110)
-
-    def update(self):
-        self.ObstacleScroll += 15
-        self.ObstacleScroll%=1000
-
-class Gold:
-    image = None ;
-    def __init__(self):
-        if self.image == None:
-            self.image = load_image('Gold.png')
-        self.GoldScroll = 0
-    def draw(self):
-        self.image.draw(1200-self.GoldScroll,90)
-        self.image.draw(1150-self.GoldScroll,90)
-        self.image.draw(1100-self.GoldScroll,90)
-        self.image.draw(950-self.GoldScroll,90)
-        self.image.draw(900-self.GoldScroll,90)
-        self.image.draw(850-self.GoldScroll,90)
-    def update(self):
-        self.GoldScroll += 15
-        self.GoldScroll% 10
-
-def enter():
+def create_world():
     global mario, tile, back, dobstacle, uobstacle, gold
     game_framework.reset_time()
     mario = Mario()
@@ -158,9 +28,8 @@ def enter():
     dobstacle = DownObstacle()
     uobstacle = UpObstacle()
     gold = Gold()
-    pass
 
-def exit():
+def destroy_world():
     global mario, tile, back, dobstacle, uobstacle, gold
     del(mario)
     del(tile)
@@ -168,14 +37,25 @@ def exit():
     del(dobstacle)
     del(uobstacle)
     del(gold)
-    pass
+
+def enter():
+    open_canvas()
+    game_framework.reset_time()
+    create_world()
+
+
+def exit():
+    destroy_world()
+    close_canvas()
 
 
 def pause():
     pass
 
+
 def resume():
     pass
+
 
 def handle_events(frame_time):
     global mario
@@ -198,15 +78,34 @@ def handle_events(frame_time):
                 if mario.state == 'SLIDE' :
                     mario.state = 'RUN'
 
+
+def collide(a, b):
+    left_a, bottom_a, right_a, top_a = a.get_bb()
+    left_b, bottom_b, right_b, top_b = b.get_bb()
+
+    if left_a > right_b: return False
+    if right_a < left_b: return False
+    if bottom_a > top_b: return False
+    if top_a < bottom_b: return False
+    return True
+
+def high_check(a, b):
+    if a.y - 13 > b.y:
+        return True
+    else:
+        return False
+
+
 def update(frame_time):
     global mario, tile, back, dobstacle, uobstacle, gold
-    back.update()
+    back.update(frame_time)
     tile.update()
     dobstacle.update()
     uobstacle.update()
     gold.update()
-    mario.update()
-    pass
+    mario.update(frame_time)
+
+
 
 def draw(frame_time):
     global mario, tile, back, dobstacle, uobstacle, gold
@@ -214,9 +113,10 @@ def draw(frame_time):
     back.draw()
     tile.draw()
     dobstacle.draw()
+    dobstacle.draw_Colbox()
     uobstacle.draw()
     gold.draw()
-    mario.draw()
+    mario.draw(frame_time)
+    mario.draw_Colbox()
     delay(0.05)
     update_canvas()
-    pass

@@ -66,8 +66,11 @@ class Mario:
         elif self.state == 'JUMP2' :
             self.jump_image.clip_draw(self.frame * 110, 0, 100, 100, self.x, self.y)
 
-    def draw_bb(self):
-        draw_rectangle(*self.get_bb())
+    def draw_Colbox(self):
+        draw_rectangle(*self.get_Colbox())
 
-    def get_bb(self):
-        return self.x - 50, self.y - 50, self.x + 50, self.y + 50
+    def get_Colbox(self):
+        if self.state != 'SLIDE' :
+            return self.x - 20, self.y - 30, self.x + 30, self.y + 30
+        elif self.state == 'SLIDE' :
+            return self.x - 30, self.y - 30, self.x + 40, self.y + 10

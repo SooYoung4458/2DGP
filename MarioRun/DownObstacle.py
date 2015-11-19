@@ -13,9 +13,9 @@ class DownObstacle:
         self.ObstacleScroll += 15
         self.ObstacleScroll%= 1200
 
-    def draw_bb(self):
-        draw_rectangle(*self.get_bb())
+    def draw_Colbox(self):
+        draw_rectangle(*self.get_Colbox())
 
-    def get_bb(self):
+    def get_Colbox(self):
         return self.ObstacleScroll - 50, 90 - 50, self.ObstacleScroll + 50, 90 + 50
 
