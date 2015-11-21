@@ -11,10 +11,12 @@ class Mario:
         self.frame = 0
         self.sign = 15
         self.sign2 = 15
+        self.hp = 1
         self.state = 'RUN'
         self.run_image = load_image('resource\\mario_animation.png')
         self.slide_image = load_image('resource\\Slide.png')
         self.jump_image = load_image('resource\\Jump.png')
+        self.hp_image = load_image('resource\\hp.png')
 
         self.run_frame = 0
         self.total_frame = 0
@@ -70,6 +72,8 @@ class Mario:
         elif self.state == 'JUMP2' :
             self.jump_image.clip_draw(0, 0, 100, 100, self.x, self.y)
 
+        #self.hp_image.clip_draw(0, 0, 600, 50, 400, 550)
+        self.hp_image.clip_draw_to_origin((self.run_frame) * 50, 0 ,self.hp*500 ,200 ,50 ,550 ,self.hp*650, 50)
     def draw_Colbox(self):
         draw_rectangle(*self.get_Colbox())
 
