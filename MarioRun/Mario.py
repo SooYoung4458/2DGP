@@ -10,6 +10,7 @@ class Mario:
         self.high = 0
         self.frame = 0
         self.sign = 15
+        self.sign2 = 15
         self.state = 'RUN'
         self.run_image = load_image('resource\\mario_animation.png')
         self.slide_image = load_image('resource\\Slide.png')
@@ -31,12 +32,16 @@ class Mario:
             self.sign *= -1
 
     def handle_jump2(self):
-        self.y += self.sign
-        if self.y > self.high + 100:
-            self.sign *= -1
+        self.y += self.sign2
+        if self.y > 190 :
+            if self.y > self.high + 100:
+                self.sign2 *= -1
+        if self.y <= 190 :
+            if self.y > self.high + 190 :
+                self.sign2 *= -1
         if self.y == 90 :
             self.state = 'RUN'
-            self.sign *= -1
+            self.sign2 *= -1
 
     def handle_slide(self):
         self.x += 0
@@ -47,24 +52,23 @@ class Mario:
 
         if self.state == 'RUN' :
             self.frame = (self.frame + 1) % 5
+            self.high = 0
+            self.sign = 15
+            self.sign2 = 15
         elif self.state == 'JUMP' :
-            self.frame = (self.frame + 1) % 1
             self.handle_jump()
-        elif self.state == 'SLIDE' :
-            self.frame = (self.frame + 1) % 1
         elif self.state == 'JUMP2' :
-            self.frame = (self.frame + 1) % 1
             self.handle_jump2()
 
     def draw(self, frame_time):
         if self.state == 'RUN' :
             self.run_image.clip_draw((self.run_frame) * 100, 0, 100, 100, self.x, self.y)
         elif self.state == 'JUMP' :
-            self.jump_image.clip_draw(self.frame * 110, 0, 100, 100, self.x, self.y)
+            self.jump_image.clip_draw(0, 0, 100, 100, self.x, self.y)
         elif self.state == 'SLIDE' :
-           self.slide_image.clip_draw(self.frame * 100, 0, 100, 100, self.x, self.y)
+           self.slide_image.clip_draw(0, 0, 100, 100, self.x, self.y)
         elif self.state == 'JUMP2' :
-            self.jump_image.clip_draw(self.frame * 110, 0, 100, 100, self.x, self.y)
+            self.jump_image.clip_draw(0, 0, 100, 100, self.x, self.y)
 
     def draw_Colbox(self):
         draw_rectangle(*self.get_Colbox())

@@ -68,7 +68,11 @@ def handle_events(frame_time):
 
         elif event.type == SDL_KEYDOWN:
             if event.key == SDLK_UP :
-                mario.state = 'JUMP'
+                if mario.y == 90 :
+                    mario.state = 'JUMP'
+                if mario.y != 90 :
+                    mario.state = 'JUMP2'
+
             elif event.key == SDLK_DOWN:
                 if mario.state == 'RUN' :
                     mario.state = 'SLIDE'
