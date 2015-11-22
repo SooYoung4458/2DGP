@@ -15,4 +15,4 @@ class Gold:
         self.image.draw(850-self.GoldScroll,90)
     def update(self):
         self.GoldScroll += 15
-        self.GoldScroll% 10
+        self.GoldScroll% 1200

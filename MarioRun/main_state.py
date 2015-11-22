@@ -1,3 +1,7 @@
+import random
+import json
+import os
+
 from pico2d import *
 
 import game_framework
@@ -9,8 +13,9 @@ from Tile import Tile
 from Gold import Gold
 from UpObstacle import UpObstacle
 from DownObstacle import DownObstacle
+from Boss import Boss
 
-name = "collision"
+name = "MainState"
 
 mario = None
 grass = None
@@ -18,9 +23,10 @@ back = None
 dobstacle = None
 uobstacle = None
 gold = None
+boss = None
 
 def create_world():
-    global mario, tile, back, dobstacle, uobstacle, gold
+    global mario, tile, back, dobstacle, uobstacle, gold, boss
     game_framework.reset_time()
     mario = Mario()
     tile = Tile()
@@ -28,15 +34,17 @@ def create_world():
     dobstacle = DownObstacle()
     uobstacle = UpObstacle()
     gold = Gold()
+    boss = Boss()
 
 def destroy_world():
-    global mario, tile, back, dobstacle, uobstacle, gold
+    global mario, tile, back, dobstacle, uobstacle, gold, boss
     del(mario)
     del(tile)
     del(back)
     del(dobstacle)
     del(uobstacle)
     del(gold)
+    del(boss)
 
 def enter():
     open_canvas()
@@ -101,25 +109,28 @@ def high_check(a, b):
 
 
 def update(frame_time):
-    global mario, tile, back, dobstacle, uobstacle, gold
+    global mario, tile, back, dobstacle, uobstacle, gold, boss
     back.update(frame_time)
     tile.update()
     dobstacle.update()
     uobstacle.update()
     gold.update()
+    boss.update()
     mario.update(frame_time)
 
 
 
 def draw(frame_time):
-    global mario, tile, back, dobstacle, uobstacle, gold
+    global mario, tile, back, dobstacle, uobstacle, gold, boss
     clear_canvas()
     back.draw()
     tile.draw()
     dobstacle.draw()
     dobstacle.draw_Colbox()
     uobstacle.draw()
+    uobstacle.draw_Colbox()
     gold.draw()
+    boss.draw()
     mario.draw(frame_time)
     mario.draw_Colbox()
     delay(0.05)

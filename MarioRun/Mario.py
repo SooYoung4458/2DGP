@@ -72,7 +72,6 @@ class Mario:
         elif self.state == 'JUMP2' :
             self.jump_image.clip_draw(0, 0, 100, 100, self.x, self.y)
 
-        #self.hp_image.clip_draw(0, 0, 600, 50, 400, 550)
         self.hp_image.clip_draw_to_origin((self.run_frame) * 50, 0 ,self.hp*500 ,200 ,50 ,550 ,self.hp*650, 50)
     def draw_Colbox(self):
         draw_rectangle(*self.get_Colbox())

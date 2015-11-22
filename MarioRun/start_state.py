@@ -1,6 +1,5 @@
-import title_state
 import game_framework
-
+import title_state
 from pico2d import *
 
 name = "StartState"
@@ -10,7 +9,7 @@ logo_time = 0.0
 def enter():
     global image
     open_canvas()
-    image = load_image('kpu_credit.png')
+    image = load_image('resource\\kpu_credit.png')
 
 def exit():
     global image
