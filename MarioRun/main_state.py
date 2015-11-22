@@ -14,6 +14,7 @@ from Gold import Gold
 from UpObstacle import UpObstacle
 from DownObstacle import DownObstacle
 from Boss import Boss
+from Item import Item
 
 name = "MainState"
 
@@ -26,7 +27,7 @@ gold = None
 boss = None
 
 def create_world():
-    global mario, tile, back, dobstacle, uobstacle, gold, boss
+    global mario, tile, back, dobstacle, uobstacle, gold, boss, item
     game_framework.reset_time()
     mario = Mario()
     tile = Tile()
@@ -35,9 +36,10 @@ def create_world():
     uobstacle = UpObstacle()
     gold = Gold()
     boss = Boss()
+    item = Item()
 
 def destroy_world():
-    global mario, tile, back, dobstacle, uobstacle, gold, boss
+    global mario, tile, back, dobstacle, uobstacle, gold, boss, item
     del(mario)
     del(tile)
     del(back)
@@ -45,6 +47,7 @@ def destroy_world():
     del(uobstacle)
     del(gold)
     del(boss)
+    del(item)
 
 def enter():
     open_canvas()
@@ -109,19 +112,20 @@ def high_check(a, b):
 
 
 def update(frame_time):
-    global mario, tile, back, dobstacle, uobstacle, gold, boss
+    global mario, tile, back, dobstacle, uobstacle, gold, boss, item
     back.update(frame_time)
     tile.update()
     dobstacle.update()
     uobstacle.update()
     gold.update()
     boss.update()
+    item.update()
     mario.update(frame_time)
 
 
 
 def draw(frame_time):
-    global mario, tile, back, dobstacle, uobstacle, gold, boss
+    global mario, tile, back, dobstacle, uobstacle, gold, boss, item
     clear_canvas()
     back.draw()
     tile.draw()
@@ -130,7 +134,10 @@ def draw(frame_time):
     uobstacle.draw()
     uobstacle.draw_Colbox()
     gold.draw()
+    gold.draw_Colbox()
     boss.draw()
+    item.draw()
+    item.draw_Colbox()
     mario.draw(frame_time)
     mario.draw_Colbox()
     delay(0.05)
