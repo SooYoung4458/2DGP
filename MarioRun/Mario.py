@@ -36,7 +36,7 @@ class Mario:
     def handle_jump2(self):
         self.y += self.sign2
         if self.y > 190 :
-            if self.y > self.high + 100:
+            if self.y > self.high + 50:
                 self.sign2 *= -1
         if self.y <= 190 :
             if self.y > self.high + 190 :

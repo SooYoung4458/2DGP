@@ -7,12 +7,16 @@ class BackGround:
     RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
     RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
-
     image = None ;
+    bgm = None ;
     def __init__(self):
         self.BackScroll = 0
         if self.image == None:
             self.image = load_image('resource\\Map_background.png')
+        if self.bgm == None :
+            self.bgm = load_music('sound\\back.mp3')
+            self.bgm.set_volume(32)
+            self.bgm.repeat_play()
     def draw(self):
         self.image.draw(400 - self.BackScroll,300)
         self.image.draw(1200 - self.BackScroll,300)
