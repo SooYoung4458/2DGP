@@ -15,7 +15,7 @@ class BackGround:
             self.image = load_image('resource\\Map_background.png')
         if self.bgm == None :
             self.bgm = load_music('sound\\back.mp3')
-            self.bgm.set_volume(32)
+            self.bgm.set_volume(64)
             self.bgm.repeat_play()
     def draw(self):
         self.image.draw(400 - self.BackScroll,300)

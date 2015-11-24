@@ -1,23 +1,41 @@
+import random
+import json
 from pico2d import *
 
-class UpObstacle:
-    image = None ;
+running = None
 
+Up_data_file = open('resource\\json\\Up_data.txt', 'r')
+Up_data = json.load(Up_data_file)
+Up_data_file.close()
+
+class UpObstacle:
+    image = None
     def __init__(self):
+        global Up_data
+        self.Up_Num = 0
+        self.x = Up_data[str(self.Up_Num)]['x']
+        self.y = Up_data[str(self.Up_Num)]['y']
         if self.image == None:
             self.image = load_image('resource\\UpObstacle.png')
-            self.ObstacleScroll = 0
-            self.x = 1200-self.ObstacleScroll
-            self.y = 110
-    def draw(self):
-        self.image.draw(1200-self.ObstacleScroll ,self.y)
 
-    def update(self):
-        self.ObstacleScroll += 15
-        self.ObstacleScroll%=1200
+    def draw(self):
+        self.image.draw(self.x, self.y)
 
     def draw_Colbox(self):
-       draw_rectangle(*self.get_Colbox())
+        draw_rectangle(*self.get_Colbox())
 
     def get_Colbox(self):
-        return 810-self.ObstacleScroll, self.y - 8, 890-self.ObstacleScroll ,self.y + 32
+        return self.x - 20, self.y - 20, self.x + 20 , self.y + 20
+
+    def Get_Num(self, data):
+        self.Up_Num = data
+        self.x = Up_data[str(self.Up_Num)]['x']
+        self.y = Up_data[str(self.Up_Num)]['y']
+
+    def update(self):
+        self.x -= 15
+        pass
+
+
+
+

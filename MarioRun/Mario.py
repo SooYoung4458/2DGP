@@ -17,6 +17,7 @@ class Mario:
         self.slide_image = load_image('resource\\Slide.png')
         self.jump_image = load_image('resource\\Jump.png')
         self.hp_image = load_image('resource\\hp.png')
+        self.jump_sound = load_wav('sound\\jump.wav')
 
         self.run_frame = 0
         self.total_frame = 0

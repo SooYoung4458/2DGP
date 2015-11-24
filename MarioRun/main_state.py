@@ -32,9 +32,9 @@ def create_world():
     mario = Mario()
     tile = Tile()
     back = BackGround()
-    dobstacle = DownObstacle()
-    uobstacle = UpObstacle()
-    gold = Gold()
+    dobstacle = []
+    uobstacle = []
+    gold = []
     boss = Boss()
     item = Item()
 
@@ -50,9 +50,19 @@ def destroy_world():
     del(item)
 
 def enter():
+    global gold, uobstacle
     open_canvas()
     game_framework.reset_time()
     create_world()
+    for x in range(0, 48):
+        gold.append(Gold())
+        gold[x].Get_Num(x)
+    for x in range(0, 21):
+        uobstacle.append(UpObstacle())
+        uobstacle[x].Get_Num(x)
+    for x in range(0, 21):
+        dobstacle.append(DownObstacle())
+        dobstacle[x].Get_Num(x)
 
 
 def exit():
@@ -81,8 +91,10 @@ def handle_events(frame_time):
             if event.key == SDLK_UP :
                 if mario.y == 90 :
                     mario.state = 'JUMP'
+                    mario.jump_sound.play()
                 if mario.y != 90 :
                     mario.state = 'JUMP2'
+                    mario.jump_sound.play()
 
             elif event.key == SDLK_DOWN:
                 if mario.state == 'RUN' :
@@ -115,9 +127,13 @@ def update(frame_time):
     global mario, tile, back, dobstacle, uobstacle, gold, boss, item
     back.update(frame_time)
     tile.update()
-    dobstacle.update()
-    uobstacle.update()
-    gold.update()
+
+    for x in range(0, 48):
+        gold[x].update()
+    for x in range(0, 21):
+        uobstacle[x].update()
+    for x in range(0, 21):
+        dobstacle[x].update()
     boss.update()
     item.update()
     mario.update(frame_time)
@@ -129,12 +145,14 @@ def draw(frame_time):
     clear_canvas()
     back.draw()
     tile.draw()
-    dobstacle.draw()
-    dobstacle.draw_Colbox()
-    uobstacle.draw()
-    uobstacle.draw_Colbox()
-    gold.draw()
-    gold.draw_Colbox()
+    for x in range(0, 48):
+        gold[x].draw()
+        gold[x].draw_Colbox()
+    for x in range(0, 21):
+        uobstacle[x].draw()
+    for x in range(0, 21):
+        dobstacle[x].draw()
+
     boss.draw()
     item.draw()
     item.draw_Colbox()
