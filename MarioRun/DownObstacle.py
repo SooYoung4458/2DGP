@@ -25,7 +25,7 @@ class DownObstacle:
         draw_rectangle(*self.get_Colbox())
 
     def get_Colbox(self):
-        return self.x - 20, self.y - 20, self.x + 20 , self.y + 20
+        return self.x - 20, self.y - 25, self.x + 20 , self.y + 25
 
     def Get_Num(self, data):
         self.Down_Num = data

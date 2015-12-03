@@ -1,0 +1,135 @@
+Traceback (most recent call last):
+  File "mygame.py", line 10, in <module>
+  File "<frozen importlib._bootstrap>", line 2237, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 2226, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1191, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1161, in _load_backward_compatible
+  File "C:\Python34\lib\site-packages\zipextimporter.py", line 86, in load_module
+    return zipimport.zipimporter.load_module(self, fullname)
+  File "C:\2DGP\MarioRun\start_state.py", line 2, in <module>
+    import title_state
+  File "<frozen importlib._bootstrap>", line 2237, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 2226, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1191, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1161, in _load_backward_compatible
+  File "C:\Python34\lib\site-packages\zipextimporter.py", line 86, in load_module
+    return zipimport.zipimporter.load_module(self, fullname)
+  File "C:\2DGP\MarioRun\title_state.py", line 2, in <module>
+    import main_state
+  File "<frozen importlib._bootstrap>", line 2237, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 2226, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1191, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1161, in _load_backward_compatible
+  File "C:\Python34\lib\site-packages\zipextimporter.py", line 86, in load_module
+    return zipimport.zipimporter.load_module(self, fullname)
+  File "C:\2DGP\MarioRun\main_state.py", line 13, in <module>
+    from Gold import Gold
+  File "<frozen importlib._bootstrap>", line 2237, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 2226, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1191, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1161, in _load_backward_compatible
+  File "C:\Python34\lib\site-packages\zipextimporter.py", line 86, in load_module
+    return zipimport.zipimporter.load_module(self, fullname)
+  File "C:\2DGP\MarioRun\Gold.py", line 7, in <module>
+    gold_data_file = open('resource\\json\\gold_data.txt', 'r')
+FileNotFoundError: [Errno 2] No such file or directory: 'resource\\json\\gold_data.txt'
+Traceback (most recent call last):
+  File "mygame.py", line 10, in <module>
+  File "<frozen importlib._bootstrap>", line 2237, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 2226, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1191, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1161, in _load_backward_compatible
+  File "C:\Python34\lib\site-packages\zipextimporter.py", line 86, in load_module
+    return zipimport.zipimporter.load_module(self, fullname)
+  File "C:\2DGP\MarioRun\start_state.py", line 2, in <module>
+    import title_state
+  File "<frozen importlib._bootstrap>", line 2237, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 2226, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1191, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1161, in _load_backward_compatible
+  File "C:\Python34\lib\site-packages\zipextimporter.py", line 86, in load_module
+    return zipimport.zipimporter.load_module(self, fullname)
+  File "C:\2DGP\MarioRun\title_state.py", line 2, in <module>
+    import main_state
+  File "<frozen importlib._bootstrap>", line 2237, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 2226, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1191, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1161, in _load_backward_compatible
+  File "C:\Python34\lib\site-packages\zipextimporter.py", line 86, in load_module
+    return zipimport.zipimporter.load_module(self, fullname)
+  File "C:\2DGP\MarioRun\main_state.py", line 13, in <module>
+    from Gold import Gold
+  File "<frozen importlib._bootstrap>", line 2237, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 2226, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1191, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1161, in _load_backward_compatible
+  File "C:\Python34\lib\site-packages\zipextimporter.py", line 86, in load_module
+    return zipimport.zipimporter.load_module(self, fullname)
+  File "C:\2DGP\MarioRun\Gold.py", line 7, in <module>
+    gold_data_file = open('resource\\json\\gold_data.txt', 'r')
+FileNotFoundError: [Errno 2] No such file or directory: 'resource\\json\\gold_data.txt'
+Traceback (most recent call last):
+  File "mygame.py", line 10, in <module>
+  File "<frozen importlib._bootstrap>", line 2237, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 2226, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1191, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1161, in _load_backward_compatible
+  File "C:\Python34\lib\site-packages\zipextimporter.py", line 86, in load_module
+    return zipimport.zipimporter.load_module(self, fullname)
+  File "C:\2DGP\MarioRun\start_state.py", line 2, in <module>
+    import title_state
+  File "<frozen importlib._bootstrap>", line 2237, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 2226, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1191, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1161, in _load_backward_compatible
+  File "C:\Python34\lib\site-packages\zipextimporter.py", line 86, in load_module
+    return zipimport.zipimporter.load_module(self, fullname)
+  File "C:\2DGP\MarioRun\title_state.py", line 2, in <module>
+    import main_state
+  File "<frozen importlib._bootstrap>", line 2237, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 2226, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1191, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1161, in _load_backward_compatible
+  File "C:\Python34\lib\site-packages\zipextimporter.py", line 86, in load_module
+    return zipimport.zipimporter.load_module(self, fullname)
+  File "C:\2DGP\MarioRun\main_state.py", line 13, in <module>
+    from Gold import Gold
+  File "<frozen importlib._bootstrap>", line 2237, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 2226, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1191, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1161, in _load_backward_compatible
+  File "C:\Python34\lib\site-packages\zipextimporter.py", line 86, in load_module
+    return zipimport.zipimporter.load_module(self, fullname)
+  File "C:\2DGP\MarioRun\Gold.py", line 7, in <module>
+    gold_data_file = open('resource\\json\\gold_data.txt', 'r')
+FileNotFoundError: [Errno 2] No such file or directory: 'resource\\json\\gold_data.txt'
+Traceback (most recent call last):
+  File "mygame.py", line 12, in <module>
+  File "C:\2DGP\MarioRun\game_framework.py", line 93, in run
+    stack[-1].handle_events(frame_time)
+  File "C:\2DGP\MarioRun\title_state.py", line 27, in handle_events
+    game_framework.change_state(main_state)
+  File "C:\2DGP\MarioRun\game_framework.py", line 52, in change_state
+    state.enter()
+  File "C:\2DGP\MarioRun\main_state.py", line 57, in enter
+    create_world()
+  File "C:\2DGP\MarioRun\main_state.py", line 32, in create_world
+    mario = Mario()
+  File "C:\2DGP\MarioRun\Mario.py", line 20, in __init__
+    self.jump_sound = load_wav('sound\\jump.wav')
+  File "C:\Python34\lib\site-packages\pico2d.py", line 378, in load_wav
+    raise IOError
+OSError
+Traceback (most recent call last):
+  File "mygame.py", line 12, in <module>
+  File "C:\2DGP\MarioRun\game_framework.py", line 93, in run
+    stack[-1].handle_events(frame_time)
+  File "C:\2DGP\MarioRun\main_state.py", line 92, in handle_events
+    game_framework.change_state(title_state)
+  File "C:\2DGP\MarioRun\game_framework.py", line 52, in change_state
+    state.enter()
+  File "C:\2DGP\MarioRun\title_state.py", line 12, in enter
+    image = load_image('resource\\title.png')
+  File "C:\Python34\lib\site-packages\pico2d.py", line 268, in load_image
+    raise IOError
+OSError

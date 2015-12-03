@@ -35,8 +35,9 @@ def create_world():
     dobstacle = []
     uobstacle = []
     gold = []
+    item = []
     boss = Boss()
-    item = Item()
+
 
 def destroy_world():
     global mario, tile, back, dobstacle, uobstacle, gold, boss, item
@@ -50,13 +51,16 @@ def destroy_world():
     del(item)
 
 def enter():
-    global gold, uobstacle
+    global gold, uobstacle, dobstacle, item
     open_canvas()
     game_framework.reset_time()
     create_world()
     for x in range(0, 48):
         gold.append(Gold())
         gold[x].Get_Num(x)
+    for x in range(0, 10):
+        item.append(Item())
+        item[x].Get_Num(x)
     for x in range(0, 21):
         uobstacle.append(UpObstacle())
         uobstacle[x].Get_Num(x)
@@ -134,28 +138,31 @@ def update(frame_time):
         uobstacle[x].update()
     for x in range(0, 21):
         dobstacle[x].update()
+    for x in range(0, 10):
+        item[x].update()
     boss.update()
-    item.update()
     mario.update(frame_time)
-
-
 
 def draw(frame_time):
     global mario, tile, back, dobstacle, uobstacle, gold, boss, item
     clear_canvas()
     back.draw()
     tile.draw()
+
     for x in range(0, 48):
         gold[x].draw()
         gold[x].draw_Colbox()
     for x in range(0, 21):
         uobstacle[x].draw()
+        uobstacle[x].draw_Colbox()
     for x in range(0, 21):
         dobstacle[x].draw()
+        dobstacle[x].draw_Colbox()
+    for x in range(0, 10):
+        item[x].draw()
+        item[x].draw_Colbox()
 
     boss.draw()
-    item.draw()
-    item.draw_Colbox()
     mario.draw(frame_time)
     mario.draw_Colbox()
     delay(0.05)

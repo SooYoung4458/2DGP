@@ -25,7 +25,7 @@ class Gold:
         draw_rectangle(*self.get_Colbox())
 
     def get_Colbox(self):
-        return self.x - 20, self.y - 20, self.x + 20 , self.y + 20
+            return self.x - 20, self.y - 20, self.x + 20 , self.y + 20
 
     def Get_Num(self, data):
         self.Gold_Num = data
