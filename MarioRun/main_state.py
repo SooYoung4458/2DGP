@@ -26,18 +26,22 @@ uobstacle = None
 gold = None
 boss = None
 
+gold_limit = 48
+item_limit = 10
+uobstacle_limit = 21
+dobstacle_limit = 21
+
 def create_world():
     global mario, tile, back, dobstacle, uobstacle, gold, boss, item
     game_framework.reset_time()
     mario = Mario()
     tile = Tile()
     back = BackGround()
-    dobstacle = []
-    uobstacle = []
-    gold = []
-    item = []
+    dobstacle = [DownObstacle() for i in range(dobstacle_limit)]
+    uobstacle = [UpObstacle() for i in range(dobstacle_limit)]
+    gold = [Gold() for i in range(gold_limit)]
+    item = [Item() for i in range(item_limit)]
     boss = Boss()
-
 
 def destroy_world():
     global mario, tile, back, dobstacle, uobstacle, gold, boss, item
@@ -55,17 +59,14 @@ def enter():
     open_canvas()
     game_framework.reset_time()
     create_world()
-    for x in range(0, 48):
-        gold.append(Gold())
+
+    for x in range(gold_limit):
         gold[x].Get_Num(x)
-    for x in range(0, 10):
-        item.append(Item())
+    for x in range(item_limit):
         item[x].Get_Num(x)
-    for x in range(0, 21):
-        uobstacle.append(UpObstacle())
+    for x in range(uobstacle_limit):
         uobstacle[x].Get_Num(x)
-    for x in range(0, 21):
-        dobstacle.append(DownObstacle())
+    for x in range(dobstacle_limit):
         dobstacle[x].Get_Num(x)
 
 
@@ -80,7 +81,6 @@ def pause():
 
 def resume():
     pass
-
 
 def handle_events(frame_time):
     global mario
@@ -111,8 +111,8 @@ def handle_events(frame_time):
 
 
 def collide(a, b):
-    left_a, bottom_a, right_a, top_a = a.get_bb()
-    left_b, bottom_b, right_b, top_b = b.get_bb()
+    left_a, bottom_a, right_a, top_a = a.get_Colbox()
+    left_b, bottom_b, right_b, top_b = b.get_Colbox()
 
     if left_a > right_b: return False
     if right_a < left_b: return False
@@ -132,16 +132,31 @@ def update(frame_time):
     back.update(frame_time)
     tile.update()
 
-    for x in range(0, 48):
+    for x in range(gold_limit):
         gold[x].update()
-    for x in range(0, 21):
+        if collide (mario, gold[x]) :
+            gold[x].Gold_Draw = False
+
+    for x in range(uobstacle_limit):
         uobstacle[x].update()
-    for x in range(0, 21):
+        if collide (mario, uobstacle[x]) :
+            mario.hp -= 8
+    for x in range(dobstacle_limit):
         dobstacle[x].update()
-    for x in range(0, 10):
+        if collide (mario, dobstacle[x]) :
+            mario.hp -= 8
+
+    for x in range(item_limit):
         item[x].update()
+        if collide(mario, item[x]) :
+            item[x].HP_item_draw = False
+            mario.hp += 10
+
+
     boss.update()
     mario.update(frame_time)
+
+
 
 def draw(frame_time):
     global mario, tile, back, dobstacle, uobstacle, gold, boss, item
@@ -149,18 +164,20 @@ def draw(frame_time):
     back.draw()
     tile.draw()
 
-    for x in range(0, 48):
-        gold[x].draw()
-        gold[x].draw_Colbox()
-    for x in range(0, 21):
+    for x in range(gold_limit):
+        if( gold[x].Gold_Draw == True):
+            gold[x].draw()
+            gold[x].draw_Colbox()
+    for x in range(uobstacle_limit):
         uobstacle[x].draw()
         uobstacle[x].draw_Colbox()
-    for x in range(0, 21):
+    for x in range(dobstacle_limit):
         dobstacle[x].draw()
         dobstacle[x].draw_Colbox()
-    for x in range(0, 10):
-        item[x].draw()
-        item[x].draw_Colbox()
+    for x in range(item_limit):
+        if( item[x].HP_item_draw == True):
+            item[x].draw()
+            item[x].draw_Colbox()
 
     boss.draw()
     mario.draw(frame_time)

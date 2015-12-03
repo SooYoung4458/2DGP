@@ -6,9 +6,10 @@ HP_item_data = json.load(HP_item_data_file)
 HP_item_data_file.close()
 
 class Item:
-    image = None ;
+    image = None
     def __init__(self):
         global HP_item_data
+        self.HP_item_draw = True
         self.HP_item_Num = 0
         self.x = HP_item_data[str(self.HP_item_Num)]['x']
         self.y = HP_item_data[str(self.HP_item_Num)]['y']

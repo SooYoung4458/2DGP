@@ -12,6 +12,7 @@ class Gold:
     image = None
     def __init__(self):
         global gold_data
+        self.Gold_Draw = True
         self.Gold_Num = 0
         self.x = gold_data[str(self.Gold_Num)]['x']
         self.y = gold_data[str(self.Gold_Num)]['y']
