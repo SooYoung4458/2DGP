@@ -15,7 +15,7 @@ class Item:
         self.y = HP_item_data[str(self.HP_item_Num)]['y']
         if self.image == None:
             self.image = load_image('resource\\Hp_item.png')
-
+        self.HP_item_sound = load_wav('sound\\pickup_HP_item.wav')
     def draw(self):
         self.image.draw(self.x, self.y)
 

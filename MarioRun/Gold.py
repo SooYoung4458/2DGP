@@ -18,6 +18,7 @@ class Gold:
         self.y = gold_data[str(self.Gold_Num)]['y']
         if self.image == None:
             self.image = load_image('resource\\Gold.png')
+        self.gold_sound = load_wav('sound\\pickup_coin.wav')
 
     def draw(self):
         self.image.draw(self.x, self.y)

@@ -15,7 +15,7 @@ from UpObstacle import UpObstacle
 from DownObstacle import DownObstacle
 from Boss import Boss
 from Item import Item
-
+from UI import UI
 name = "MainState"
 
 mario = None
@@ -32,7 +32,7 @@ uobstacle_limit = 21
 dobstacle_limit = 21
 
 def create_world():
-    global mario, tile, back, dobstacle, uobstacle, gold, boss, item
+    global mario, tile, back, dobstacle, uobstacle, gold, boss, item, ui
     game_framework.reset_time()
     mario = Mario()
     tile = Tile()
@@ -42,9 +42,10 @@ def create_world():
     gold = [Gold() for i in range(gold_limit)]
     item = [Item() for i in range(item_limit)]
     boss = Boss()
+    ui = UI()
 
 def destroy_world():
-    global mario, tile, back, dobstacle, uobstacle, gold, boss, item
+    global mario, tile, back, dobstacle, uobstacle, gold, boss, item, ui
     del(mario)
     del(tile)
     del(back)
@@ -53,6 +54,7 @@ def destroy_world():
     del(gold)
     del(boss)
     del(item)
+    del(ui)
 
 def enter():
     global gold, uobstacle, dobstacle, item
@@ -89,7 +91,7 @@ def handle_events(frame_time):
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-            game_framework.change_state(title_state)
+            game_framework.push_state(title_state)
 
         elif event.type == SDL_KEYDOWN:
             if event.key == SDLK_UP :
@@ -128,19 +130,22 @@ def high_check(a, b):
 
 
 def update(frame_time):
-    global mario, tile, back, dobstacle, uobstacle, gold, boss, item
+    global mario, tile, back, dobstacle, uobstacle, gold, boss, item, ui
     back.update(frame_time)
     tile.update()
-
+    ui.update(frame_time)
     for x in range(gold_limit):
         gold[x].update()
         if collide (mario, gold[x]) :
+            gold[x].gold_sound.play()
             gold[x].Gold_Draw = False
+            ui.score += 0.5
 
     for x in range(uobstacle_limit):
         uobstacle[x].update()
         if collide (mario, uobstacle[x]) :
             mario.hp -= 8
+
     for x in range(dobstacle_limit):
         dobstacle[x].update()
         if collide (mario, dobstacle[x]) :
@@ -149,6 +154,7 @@ def update(frame_time):
     for x in range(item_limit):
         item[x].update()
         if collide(mario, item[x]) :
+            item[x].HP_item_sound.play()
             item[x].HP_item_draw = False
             mario.hp += 10
 
@@ -163,7 +169,7 @@ def draw(frame_time):
     clear_canvas()
     back.draw()
     tile.draw()
-
+    ui.draw()
     for x in range(gold_limit):
         if( gold[x].Gold_Draw == True):
             gold[x].draw()
