@@ -152,7 +152,7 @@ def update(frame_time):
             mario.hp -= 8
 
     for x in range(item_limit):
-        item[x].update()
+        item[x].update(frame_time)
         if collide(mario, item[x]) :
             item[x].HP_item_sound.play()
             item[x].HP_item_draw = False
@@ -185,5 +185,5 @@ def draw(frame_time):
     boss.draw()
     mario.draw(frame_time)
  #   mario.draw_Colbox()
-    delay(0.05)
+    delay(0.02)
     update_canvas()

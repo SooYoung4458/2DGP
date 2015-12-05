@@ -4,6 +4,17 @@ class Mario:
     TIME_PER_ACTION = 0.5
     ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
     FRAMES_PER_ACTION = 5
+    PIXEL_PER_METER = (10.0 / 0.3)           # 10 pixel 30 cm
+
+    JUMP_SPEED_KMPH = 1.0                    # Km / Hour
+    JUMP_SPEED_MPM = (JUMP_SPEED_KMPH * 1000.0 / 60.0)
+    JUMP_SPEED_MPS = (JUMP_SPEED_MPM / 60.0)
+    JUMP_SPEED_PPS = (JUMP_SPEED_MPS * PIXEL_PER_METER)
+
+    JUMP2_SPEED_KMPH = 1.0                    # Km / Hour
+    JUMP2_SPEED_MPM = (JUMP_SPEED_KMPH * 1000.0 / 60.0)
+    JUMP2_SPEED_MPS = (JUMP_SPEED_MPM / 60.0)
+    JUMP2_SPEED_PPS = (JUMP_SPEED_MPS * PIXEL_PER_METER)
 
     def __init__(self):
         self.x, self.y = 100, 90
@@ -25,26 +36,26 @@ class Mario:
     image = None
     RUN, JUMP, SLIDE, JUMP2 = 0, 1, 2, 3
 
-    def handle_jump(self):
-        self.y += self.sign
+    def handle_jump(self,frame_time):
+        self.y += Mario.JUMP_SPEED_PPS
         if self.y > 190:
-            self.sign *= -1
+            Mario.JUMP_SPEED_PPS *= -1
             self.high = self.y
         if self.y == 90 :
             self.state = 'RUN'
-            self.sign *= -1
+            Mario.JUMP_SPEED_PPS *= -1
 
-    def handle_jump2(self):
-        self.y += self.sign2
+    def handle_jump2(self, frame_time):
+        self.y += Mario.JUMP2_SPEED_PPS
         if self.y > 190 :
             if self.y > self.high + 50:
-                self.sign2 *= -1
+                Mario.JUMP2_SPEED_PPS *= -1
         if self.y <= 190 :
             if self.y > self.high + 190 :
-                self.sign2 *= -1
+                Mario.JUMP2_SPEED_PPS *= -1
         if self.y == 90 :
             self.state = 'RUN'
-            self.sign2 *= -1
+            Mario.JUMP2_SPEED_PPS *= -1
 
     def handle_slide(self):
         self.x += 0
@@ -60,9 +71,9 @@ class Mario:
             self.sign = 15
             self.sign2 = 15
         elif self.state == 'JUMP' :
-            self.handle_jump()
+            self.handle_jump(frame_time)
         elif self.state == 'JUMP2' :
-            self.handle_jump2()
+            self.handle_jump2(frame_time)
 
     def draw(self, frame_time):
         if self.state == 'RUN' :
