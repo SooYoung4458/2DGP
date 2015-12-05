@@ -28,8 +28,8 @@ boss = None
 
 gold_limit = 48
 item_limit = 10
-uobstacle_limit = 21
-dobstacle_limit = 21
+uobstacle_limit = 31
+dobstacle_limit = 31
 
 def create_world():
     global mario, tile, back, dobstacle, uobstacle, gold, boss, item, ui
@@ -132,22 +132,22 @@ def high_check(a, b):
 def update(frame_time):
     global mario, tile, back, dobstacle, uobstacle, gold, boss, item, ui
     back.update(frame_time)
-    tile.update()
+    tile.update(frame_time)
     ui.update(frame_time)
     for x in range(gold_limit):
-        gold[x].update()
+        gold[x].update(frame_time)
         if collide (mario, gold[x]) :
             gold[x].gold_sound.play()
             gold[x].Gold_Draw = False
             ui.score += 0.5
 
     for x in range(uobstacle_limit):
-        uobstacle[x].update()
+        uobstacle[x].update(frame_time)
         if collide (mario, uobstacle[x]) :
             mario.hp -= 8
 
     for x in range(dobstacle_limit):
-        dobstacle[x].update()
+        dobstacle[x].update(frame_time)
         if collide (mario, dobstacle[x]) :
             mario.hp -= 8
 
@@ -157,11 +157,8 @@ def update(frame_time):
             item[x].HP_item_sound.play()
             item[x].HP_item_draw = False
             mario.hp += 10
-
-
-    boss.update()
+    boss.update(frame_time)
     mario.update(frame_time)
-
 
 
 def draw(frame_time):
@@ -173,20 +170,20 @@ def draw(frame_time):
     for x in range(gold_limit):
         if( gold[x].Gold_Draw == True):
             gold[x].draw()
-            gold[x].draw_Colbox()
+      #      gold[x].draw_Colbox()
     for x in range(uobstacle_limit):
         uobstacle[x].draw()
-        uobstacle[x].draw_Colbox()
+      #  uobstacle[x].draw_Colbox()
     for x in range(dobstacle_limit):
         dobstacle[x].draw()
-        dobstacle[x].draw_Colbox()
+      #  dobstacle[x].draw_Colbox()
     for x in range(item_limit):
         if( item[x].HP_item_draw == True):
             item[x].draw()
-            item[x].draw_Colbox()
+       #     item[x].draw_Colbox()
 
     boss.draw()
     mario.draw(frame_time)
-    mario.draw_Colbox()
+ #   mario.draw_Colbox()
     delay(0.05)
     update_canvas()
