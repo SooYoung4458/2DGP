@@ -26,7 +26,7 @@ uobstacle = None
 gold = None
 boss = None
 
-gold_limit = 48
+gold_limit = 160
 item_limit = 10
 uobstacle_limit = 31
 dobstacle_limit = 31
@@ -137,26 +137,26 @@ def update(frame_time):
     for x in range(gold_limit):
         gold[x].update(frame_time)
         if collide (mario, gold[x]) :
-            gold[x].gold_sound.play()
+           # gold[x].gold_sound.play()
             gold[x].Gold_Draw = False
             ui.score += 0.5
 
     for x in range(uobstacle_limit):
         uobstacle[x].update(frame_time)
         if collide (mario, uobstacle[x]) :
-            mario.hp -= 8
+            mario.hp -= 6
 
     for x in range(dobstacle_limit):
         dobstacle[x].update(frame_time)
         if collide (mario, dobstacle[x]) :
-            mario.hp -= 8
+            mario.hp -= 6
 
     for x in range(item_limit):
         item[x].update(frame_time)
         if collide(mario, item[x]) :
             item[x].HP_item_sound.play()
             item[x].HP_item_draw = False
-            mario.hp += 10
+            mario.hp += 15
     boss.update(frame_time)
     mario.update(frame_time)
 

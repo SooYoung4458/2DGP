@@ -55,7 +55,8 @@ class Mario:
                 Mario.JUMP2_SPEED_PPS *= -1
         if self.y == 90 :
             self.state = 'RUN'
-            Mario.JUMP2_SPEED_PPS *= -1
+            Mario.JUMP2_SPEED_PPS = (Mario.JUMP_SPEED_MPS * Mario.PIXEL_PER_METER)
+            Mario.JUMP_SPEED_PPS = (Mario.JUMP_SPEED_MPS * Mario.PIXEL_PER_METER)
 
     def handle_slide(self):
         self.x += 0
@@ -68,8 +69,6 @@ class Mario:
         if self.state == 'RUN' :
             self.frame = (self.frame + 1) % 5
             self.high = 0
-            self.sign = 15
-            self.sign2 = 15
         elif self.state == 'JUMP' :
             self.handle_jump(frame_time)
         elif self.state == 'JUMP2' :
