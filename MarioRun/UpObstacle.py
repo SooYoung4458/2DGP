@@ -15,10 +15,11 @@ class UpObstacle:
     RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
     RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
     image = None
+
     def __init__(self):
         global Up_data
         self.Up_Num = 0
-        self.time = 0
+        self.collide = True
         self.x = Up_data[str(self.Up_Num)]['x']
         self.y = Up_data[str(self.Up_Num)]['y']
         if self.image == None:
@@ -39,10 +40,7 @@ class UpObstacle:
         self.y = Up_data[str(self.Up_Num)]['y']
 
     def update(self, frame_time):
-        self.time += 1
         self.x -= UpObstacle.RUN_SPEED_PPS * frame_time
-        if self.time % 500 == 0 :
-            UpObstacle.RUN_SPEED_PPS += 2
         pass
 
 

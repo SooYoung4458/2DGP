@@ -9,17 +9,16 @@ class Boss:
     image = None ;
     hp_image = None ;
     hp = 100
+    x = 5000
     def __init__(self):
         if self.image == None:
             self.image = load_image('resource\\Boss.png')
         if self.hp_image == None:
             self.hp_image = load_image('resource\\boss_hp.png')
-            self.x = 8000
 
     def draw(self):
         self.image.clip_draw_to_origin(0, 0 ,400 ,100 ,self.x+700 ,60 ,500, 100)
         self.hp_image.clip_draw_to_origin(0, 0 ,300 ,500 ,self.x+700 ,170 ,self.hp, 20)
-
     def update(self, frame_time):
         if self.x > 0 :
                 self.x -= Boss.RUN_SPEED_PPS * frame_time

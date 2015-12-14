@@ -29,6 +29,7 @@ class Mario:
         self.jump_image = load_image('resource\\Jump.png')
         self.hp_image = load_image('resource\\hp.png')
         self.jump_sound = load_wav('sound\\jump.wav')
+        self.collide_sound =load_wav('sound\\collide.ogg')
 
         self.run_frame = 0
         self.total_frame = 0
@@ -64,7 +65,7 @@ class Mario:
     def update(self, frame_time):
         self.total_frame += self.FRAMES_PER_ACTION * self.ACTION_PER_TIME * frame_time
         self.run_frame = int(self.total_frame) % self.FRAMES_PER_ACTION
-        self.hp -= 1
+        self.hp -= 0.7
 
         if self.state == 'RUN' :
             self.frame = (self.frame + 1) % 5

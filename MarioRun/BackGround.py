@@ -9,25 +9,34 @@ class BackGround:
 
     image = None ;
     bgm = None ;
+    gameover_image = None ;
+    gameclear_image = None ;
     def __init__(self):
         self.BackScroll = 0
-        self.time = 0
         if self.image == None:
             self.image = load_image('resource\\Map_background.png')
+        if self.gameclear_image == None:
+            self.gameclear_image = load_image('resource\\gameclear.png')
+        if self.gameover_image == None:
+            self.gameover_image = load_image('resource\\gameover.png')
         if self.bgm == None :
             self.bgm = load_music('sound\\back.mp3')
             self.bgm.set_volume(64)
-           # self.bgm.repeat_play()
+            self.bgm.repeat_play()
     def draw(self):
         self.image.draw(400 - self.BackScroll,300)
         self.image.draw(1200 - self.BackScroll,300)
         if self.BackScroll == 800 :
             self.BackScroll = 0
+
+    def clear_draw(self):
+        self.gameclear_image.draw(400,300)
+
+    def over_draw(self):
+        self.gameover_image.draw(400,300)
+
     def update(self, frame_time):
-        self.time += 1
         self.BackScroll+= BackGround.RUN_SPEED_PPS * frame_time
         self.BackScroll%=800
-        if self.time % 500 == 0 :
-            BackGround.RUN_SPEED_PPS += 2
 
 

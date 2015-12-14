@@ -16,7 +16,6 @@ class Item:
         global HP_item_data
         self.HP_item_draw = True
         self.HP_item_Num = 0
-        self.time = 0
         self.x = HP_item_data[str(self.HP_item_Num)]['x']
         self.y = HP_item_data[str(self.HP_item_Num)]['y']
         if self.image == None:
@@ -26,10 +25,7 @@ class Item:
         self.image.draw(self.x, self.y)
 
     def update(self,frame_time):
-        self.time += 1
         self.x -= Item.RUN_SPEED_PPS * frame_time
-        if self.time % 200 == 0 :
-            Item.RUN_SPEED_PPS += 2
 
 
     def draw_Colbox(self):

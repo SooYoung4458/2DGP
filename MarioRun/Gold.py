@@ -20,7 +20,6 @@ class Gold:
         global gold_data
         self.Gold_Draw = True
         self.Gold_Num = 0
-        self.time = 0
         self.x = gold_data[str(self.Gold_Num)]['x']
         self.y = gold_data[str(self.Gold_Num)]['y']
         if self.image == None:
@@ -42,10 +41,8 @@ class Gold:
         self.y = gold_data[str(self.Gold_Num)]['y']
 
     def update(self, frame_time):
-        self.time += 1
         self.x -= Gold.RUN_SPEED_PPS * frame_time
-        if self.time % 500 == 0 :
-            Gold.RUN_SPEED_PPS += 2
+
         pass
 
 

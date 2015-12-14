@@ -133,3 +133,16 @@ Traceback (most recent call last):
   File "C:\Python34\lib\site-packages\pico2d.py", line 268, in load_image
     raise IOError
 OSError
+Traceback (most recent call last):
+  File "mygame.py", line 12, in <module>
+  File "C:\2DGP\MarioRun\game_framework.py", line 93, in run
+    stack[-1].handle_events(frame_time)
+  File "C:\2DGP\MarioRun\main_state.py", line 92, in handle_events
+    game_framework.quit()
+  File "C:\2DGP\MarioRun\game_framework.py", line 52, in change_state
+    state.enter()
+  File "C:\2DGP\MarioRun\title_state.py", line 12, in enter
+    global image
+  File "C:\Python34\lib\site-packages\pico2d.py", line 268, in load_image
+    raise IOError
+OSError

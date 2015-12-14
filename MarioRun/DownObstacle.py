@@ -18,7 +18,7 @@ class DownObstacle:
     def __init__(self):
         global Down_data
         self.Down_Num = 0
-        self.time = 0
+        self.collide = True
         self.x = Down_data[str(self.Down_Num)]['x']
         self.y = Down_data[str(self.Down_Num)]['y']
         if self.image == None:
@@ -39,10 +39,7 @@ class DownObstacle:
         self.y = Down_data[str(self.Down_Num)]['y']
 
     def update(self, frame_time):
-        self.time += 1
         self.x -= DownObstacle.RUN_SPEED_PPS * frame_time
-        if self.time % 500 == 0 :
-            DownObstacle.RUN_SPEED_PPS += 2
         pass
 
 

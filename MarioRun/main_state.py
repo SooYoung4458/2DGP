@@ -6,6 +6,8 @@ from pico2d import *
 
 import game_framework
 import title_state
+import gameclear
+import gameover
 
 from Mario import Mario
 from BackGround import BackGround
@@ -26,7 +28,7 @@ uobstacle = None
 gold = None
 boss = None
 
-gold_limit = 160
+gold_limit = 230
 item_limit = 10
 uobstacle_limit = 31
 dobstacle_limit = 31
@@ -71,11 +73,9 @@ def enter():
     for x in range(dobstacle_limit):
         dobstacle[x].Get_Num(x)
 
-
 def exit():
     destroy_world()
     close_canvas()
-
 
 def pause():
     pass
@@ -122,13 +122,6 @@ def collide(a, b):
     if top_a < bottom_b: return False
     return True
 
-def high_check(a, b):
-    if a.y - 13 > b.y:
-        return True
-    else:
-        return False
-
-
 def update(frame_time):
     global mario, tile, back, dobstacle, uobstacle, gold, boss, item, ui
     back.update(frame_time)
@@ -137,19 +130,27 @@ def update(frame_time):
     for x in range(gold_limit):
         gold[x].update(frame_time)
         if collide (mario, gold[x]) :
-           # gold[x].gold_sound.play()
+            gold[x].gold_sound.play()
             gold[x].Gold_Draw = False
             ui.score += 0.5
+            if(boss.x < 0) :
+                boss.hp -= 0.1
 
     for x in range(uobstacle_limit):
         uobstacle[x].update(frame_time)
-        if collide (mario, uobstacle[x]) :
-            mario.hp -= 6
+        if collide (mario, uobstacle[x]):
+            if uobstacle[x].collide == True :
+                uobstacle[x].collide = False
+                mario.hp -= 10
+                mario.collide_sound.play()
 
     for x in range(dobstacle_limit):
         dobstacle[x].update(frame_time)
-        if collide (mario, dobstacle[x]) :
-            mario.hp -= 6
+        if collide (mario, dobstacle[x]):
+            if dobstacle[x].collide == True :
+                dobstacle[x].collide = False
+                mario.hp -= 10
+                mario.collide_sound.play(1)
 
     for x in range(item_limit):
         item[x].update(frame_time)
@@ -159,6 +160,11 @@ def update(frame_time):
             mario.hp += 15
     boss.update(frame_time)
     mario.update(frame_time)
+
+    if boss.hp < 0 :
+        game_framework.push_state(gameclear)
+    if mario.hp < 0 :
+        game_framework.push_state(gameover)
 
 
 def draw(frame_time):
@@ -170,20 +176,19 @@ def draw(frame_time):
     for x in range(gold_limit):
         if( gold[x].Gold_Draw == True):
             gold[x].draw()
-      #      gold[x].draw_Colbox()
+
     for x in range(uobstacle_limit):
         uobstacle[x].draw()
-      #  uobstacle[x].draw_Colbox()
+
     for x in range(dobstacle_limit):
         dobstacle[x].draw()
-      #  dobstacle[x].draw_Colbox()
+
     for x in range(item_limit):
         if( item[x].HP_item_draw == True):
             item[x].draw()
-       #     item[x].draw_Colbox()
 
     boss.draw()
     mario.draw(frame_time)
- #   mario.draw_Colbox()
+
     delay(0.02)
     update_canvas()

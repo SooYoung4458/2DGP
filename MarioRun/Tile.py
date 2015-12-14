@@ -12,7 +12,6 @@ class Tile:
         if self.image == None:
             self.image = load_image('resource\\tile.png')
         self.TileScroll = 0
-        self.time = 0
 
     def draw(self):
         self.image.draw(400-self.TileScroll,30)
@@ -21,8 +20,5 @@ class Tile:
             self.TileScroll = 0
 
     def update(self, frame_time):
-        self.time += 1
         self.TileScroll += Tile.RUN_SPEED_PPS * frame_time
         self.TileScroll%=800
-        if self.time % 500 == 0 :
-            Tile.RUN_SPEED_PPS += 2
