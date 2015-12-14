@@ -5,7 +5,7 @@
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{D7A5EE68-1DFD-4479-B134-535B50A0428C}
+AppId={{F8BD492F-4B28-4689-898C-BD548E67FD39}
 AppName=MarioRun
 AppVersion=1.5
 ;AppVerName=MarioRun 1.5

@@ -65,7 +65,7 @@ class Mario:
     def update(self, frame_time):
         self.total_frame += self.FRAMES_PER_ACTION * self.ACTION_PER_TIME * frame_time
         self.run_frame = int(self.total_frame) % self.FRAMES_PER_ACTION
-        self.hp -= 0.7
+        self.hp -= 1.2
 
         if self.state == 'RUN' :
             self.frame = (self.frame + 1) % 5
