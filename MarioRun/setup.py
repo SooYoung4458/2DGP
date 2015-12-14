@@ -80,9 +80,11 @@ manifest_template = '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
 
 mygame = Target(
-    script = "mygame.py",
-    dest_base = "MarioRun",
-    icon_resources = [(1, r"pico2d.ico")],
+    script = 'mygame.py',
+    dest_base = 'MarioRun',
+    icon_resources=[(1, r"mario.ico")],
+
+
     other_resources = [(RT_MANIFEST, 1, (manifest_template % dict(prog="mygame", level="asInvoker")).encode("utf-8"))]
     )
 
@@ -104,10 +106,10 @@ else:
 
 sdl_dlls = [sdl_folder + file_name for file_name in os.listdir(sdl_folder)]
 
+
 setup(name="name",
       windows=[mygame],
       data_files=[('.', resources), (sdl_folder, sdl_dlls)], # copy resource to '.' folder
       zipfile=None,
       options={"py2exe": py2exe_options},
       )
-

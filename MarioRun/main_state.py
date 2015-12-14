@@ -134,7 +134,7 @@ def update(frame_time):
             gold[x].Gold_Draw = False
             ui.score += 0.5
             if(boss.x < 0) :
-                boss.hp -= 0.1
+                boss.hp -= 0.2
 
     for x in range(uobstacle_limit):
         uobstacle[x].update(frame_time)
